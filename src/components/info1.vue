@@ -2,10 +2,10 @@
   <div class="all">
       <header>
         
-          <span  style="margin:10px 8px 8px 102.5px">源IP :</span><span><el-input v-model="searchValue.sourceIP"></el-input></span> 
-          <span  style="margin:10px 8px 8px 107.5px">目的IP :</span><span><el-input v-model="searchValue.destIP"></el-input></span> 
-          <span  style="margin:10px 8px 8px 88px">备案归属 :</span><span><el-input v-model="searchValue.record"></el-input></span> <br/>
-          <span  style="margin:2px 8px 8px 69px">起始时间 :</span><span><el-date-picker
+          <span  style="margin:10px 8px 8px 9%">源IP :</span><span><el-input v-model="searchValue.sourceIP"></el-input></span> 
+          <span  style="margin:10px 8px 8px 12%">目的IP :</span><span><el-input v-model="searchValue.destIP"></el-input></span> 
+          <span  style="margin:10px 8px 8px 11%">备案归属 :</span><span><el-input v-model="searchValue.record"></el-input></span> <br/>
+          <span  style="margin:2px 8px 8px 6.1%">起始时间 :</span><span><el-date-picker
             v-model="start_time"
             type="datetime"
             placeholder="选择时间"
@@ -15,7 +15,7 @@
             >
             
           </el-date-picker></span>      
-          <span  style="margin:2px 8px 8px 90px">终止时间 :</span><span><el-date-picker
+          <span  style="margin:2px 8px 8px 10.5%">终止时间 :</span><span><el-date-picker
             v-model="end_time"
             type="datetime"
             placeholder="选择时间"
@@ -23,7 +23,7 @@
             :picker-options="pickerOptions"
             value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker></span>  
-          <span  style="margin:2px 8px 8px 72px">数据库类型 :</span>
+          <span  style="margin:2px 8px 8px 9.6%">数据库类型 :</span>
             <span>
               <el-select v-model="value" clearable placeholder="请选择" ref="selectLable1">
                 <el-option
@@ -34,11 +34,11 @@
                 </el-option>
               </el-select>
             </span>  <br/>        
-           <span  style="margin:2px 8px 8px 100.5px">省份 :</span><span><el-input v-model="searchValue.destProvince"></el-input></span> 
-           <span  style="margin:2px 8px 8px 122.5px">地市 :</span><span><el-input v-model="searchValue.destCity"></el-input></span> 
-           <span  style="margin:2px 8px 8px 120px">区县 :</span><span><el-input v-model="searchValue.destDistrict"></el-input></span> 
+           <span  style="margin:2px 8px 8px 8.9%">省份 :</span><span><el-input v-model="searchValue.destProvince"></el-input></span> 
+           <span  style="margin:2px 8px 8px 13.3%">地市 :</span><span><el-input v-model="searchValue.destCity"></el-input></span> 
+           <span  style="margin:2px 8px 8px 13.8%">区县 :</span><span><el-input v-model="searchValue.destDistrict"></el-input></span> 
             
-           <span style="margin:-6px 8px 8px 81px"><el-button @click="search()">查询</el-button></span> 
+           <span style="margin:-6px 8px 8px 7%"><el-button @click="search()">查询</el-button></span> 
         
       </header>
       <section class="Body">
@@ -48,79 +48,91 @@
                     currentPage * pagesize
                   )"
           class="tableClass"
+          size="small"  
           stripe
           border
           v-loading="loading"
-          style="width:95%;margin: auto;"
+          style="width:96%;margin: auto;"
           ref="multipleTable"          
           tooltip-effect="dark"
           >
-          <el-table-column
-            fixed
-            prop="event_time"
-            label="时间"
-            min-width="160"
-            show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column
-            prop="database_type"
-            label="数据库类型"
-            min-width="120"
-            show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            label="操作类型"
-            min-width="120"
-            show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column
-            prop="sip"
-            label="源IP"
-            min-width="125"
-            show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column
-            prop="sport"
-            label="源端口"
-            min-width="80"
-            show-overflow-tooltip>
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-form label-position="left" inline class="demo-table-expand">
+                <el-form-item label="payload">
+                  <span style=" display: inline-block;">{{ props.row.payload }}</span>
+                </el-form-item>
+              </el-form>
+            </template>
           </el-table-column>
           <el-table-column
             prop="dip"
             label="目的IP"
-            min-width="120"
+            min-width="116"
+            
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             prop="dport"
             label="目的端口"
-            min-width="90"
+            min-width="71"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
+            
+            prop="event_time"
+            label="时间"
+            min-width="141"
+            show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column
+            prop="sip"
+            label="源IP"
+            min-width="116"
+            show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column
+            prop="sport"
+            label="源端口"
+            min-width="61"
+            show-overflow-tooltip>
+          </el-table-column>
+          
+          <el-table-column
+            prop="database_type"
+            label="数据库类型"
+            min-width="95"
+            show-overflow-tooltip>
+          </el-table-column>
+          <el-table-column
+            prop="status"
+            label="操作类型"
+            min-width="83"
+            show-overflow-tooltip>
+          </el-table-column>          
+          <el-table-column
             prop="d_region"
             label="省份"
-            min-width="90"
+            min-width="59"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             prop="d_city"
             label="地市"
-            min-width="90"
+            min-width="59"
             show-overflow-tooltip>
 
           </el-table-column>
           <el-table-column
             prop="d_district"
             label="区县"
-            min-width="110"
+            min-width="59"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             prop="d_owner"
             label="IP备案信息"
-            min-width="190"
+            min-width="143"
             show-overflow-tooltip>
           </el-table-column>
         </el-table>
@@ -183,68 +195,69 @@
 
       },
       tableData:[
-        {
-        event_time:"2022-09-04 12:28:50",
-        database_type:"Elasticsearch",
-        status:"es登陆成功",
-        sip:"18.183.247.190",
-        sport:50068,
-        dip:"222.212.90.33",
-        dport:9200,
-        d_region:"四川省",
-        d_city:"成都市",
-        d_district:"市辖区",
-        d_owner:"锦江肖小儿中医门诊部"
-      },
-      {
-        event_time:"2022-09-04 12:28:50",
-        database_type:"Elasticsearch",
-        status:"es登陆成功",
-        sip:"18.183.247.190",
-        sport:50068,
-        dip:"222.212.90.33",
-        dport:9200,
-        d_region:"四川省",
-        d_city:"成都市",
-        d_district:"市辖区",
-        d_owner:"锦江肖小儿中医门诊部"
-      },{
-        event_time:"2022-09-04 12:28:50",
-        database_type:"Elasticsearch",
-        status:"es登陆成功",
-        sip:"18.183.247.190",
-        sport:50068,
-        dip:"222.212.90.33",
-        dport:9200,
-        d_region:"四川省",
-        d_city:"成都市",
-        d_district:"市辖区",
-        d_owner:"锦江肖小儿中医门诊部"
-      },{
-        event_time:"2022-09-04 12:28:50",
-        database_type:"Elasticsearch",
-        status:"es登陆成功",
-        sip:"18.183.247.190",
-        sport:50068,
-        dip:"222.212.90.33",
-        dport:9200,
-        d_region:"四川省",
-        d_city:"成都市",
-        d_district:"市辖区",
-        d_owner:"锦江肖小儿中医门诊部"
-      },{
-        event_time:"2022-09-04 12:28:50",
-        database_type:"Elasticsearch",
-        status:"es登陆成功",
-        sip:"18.183.247.190",
-        sport:50068,
-        dip:"222.212.90.33",
-        dport:9200,
-        d_region:"四川省",
-        d_city:"成都市",
-        d_district:"市辖区",
-        d_owner:"锦江肖小儿中医门诊部"
-      },
+      //   {
+      //   event_time:"2022-09-04 12:28:50",
+      //   database_type:"Elasticsearch",
+      //   status:"es登陆成功",
+      //   sip:"189.183.247.190",
+      //   sport:50068,
+      //   dip:"222.212.909.333",
+      //   dport:9200,
+      //   d_region:"四川省",
+      //   d_city:"成都市",
+      //   d_district:"市辖区",
+      //   d_owner:"锦江肖小儿中医门诊部",
+      //   payload:'sajsahkdjhfsadhafsdgasgagsafhsadnfsaduouhguossadnflsadngsasadfasdgrtwhdgsgjsgjhsdhsfhsfh4ty4whdsfhsdfhsfognasfkjsadhkgjdouhuworgwriogsadsdjafjksdafkjsabdjgbsasjdlfljsadfasjgdlkjsdalhdglsdhgaklasdjgasdjfoiasjdflksadjflsajdfoisjdfsadjflsaasjdlfkjasldgsangmsndgdfnwohguowrngsdansldfl'
+      // },
+      // {
+      //   event_time:"2022-09-04 12:28:50",
+      //   database_type:"Elasticsearch",
+      //   status:"es登陆成功",
+      //   sip:"18.183.247.190",
+      //   sport:50068,
+      //   dip:"222.212.90.33",
+      //   dport:9200,
+      //   d_region:"四川省",
+      //   d_city:"成都市",
+      //   d_district:"市辖区",
+      //   d_owner:"锦江肖小儿中医门诊部"
+      // },{
+      //   event_time:"2022-09-04 12:28:50",
+      //   database_type:"Elasticsearch",
+      //   status:"es登陆成功",
+      //   sip:"18.183.247.190",
+      //   sport:50068,
+      //   dip:"222.212.90.33",
+      //   dport:9200,
+      //   d_region:"四川省",
+      //   d_city:"成都市",
+      //   d_district:"市辖区",
+      //   d_owner:"锦江肖小儿中医门诊部"
+      // },{
+      //   event_time:"2022-09-04 12:28:50",
+      //   database_type:"Elasticsearch",
+      //   status:"es登陆成功",
+      //   sip:"18.183.247.190",
+      //   sport:50068,
+      //   dip:"222.212.90.33",
+      //   dport:9200,
+      //   d_region:"四川省",
+      //   d_city:"成都市",
+      //   d_district:"市辖区",
+      //   d_owner:"锦江肖小儿中医门诊部"
+      // },{
+      //   event_time:"2022-09-04 12:28:50",
+      //   database_type:"Elasticsearch",
+      //   status:"es登陆成功",
+      //   sip:"18.183.247.190",
+      //   sport:50068,
+      //   dip:"222.212.90.33",
+      //   dport:9200,
+      //   d_region:"四川省",
+      //   d_city:"成都市",
+      //   d_district:"市辖区",
+      //   d_owner:"锦江肖小儿中医门诊部"
+      // },
     ],
       options: [{
           value: '选项1',
@@ -323,7 +336,7 @@
       //console.log(`当前页: ${val}`);
     },
     search(){
-      // this.loading = true;
+      this.loading = true;
       
       this.$store.dispatch('updatereqdata',{
               sip: this.searchValue.sourceIP,
@@ -336,16 +349,7 @@
               d_city: this.searchValue.destCity,
               d_district: this.searchValue.destDistrict
             })
-      console.log('存入的database_type：'+this.$store.state.reqdata.database_type)
-      // this.searchValue.sourceIP = this.$store.state.reqdata.sip,
-      // this.searchValue.destIP = this.$store.state.reqdata.dip,
-      // this.start_time = this.$store.state.reqdata.s_time,
-      // this.end_time = this.$store.state.reqdata.e_time,
-      // this.searchValue.record = this.$store.state.reqdata.owner,
-      // this.value = this.$store.state.reqdata.database_type,
-      // this.searchValue.destProvince = this.$store.state.reqdata.d_province,
-      // this.searchValue.destCity = this.$store.state.reqdata.d_city,
-      // this.searchValue.destDistrict = this.$store.state.reqdata.d_district,
+      // console.log('存入的database_type：'+this.$store.state.reqdata.database_type)
       axios({
         method:"post",
         url:"/search_operate_history",
@@ -375,17 +379,17 @@
             message: "用户信息异常,请重试！",
             type: "error",
           });
-            // window.sessionStorage.clear();
-            // this.$router.replace("/");
-            // //触发后禁止浏览器的后退键
-            // history.pushState(null, null, document.URL);
-            // window.addEventListener(
-            //   "popstate",
-            //   function (e) {
-            //     history.pushState(null, null, document.URL);
-            //   },
-            //   false
-            // );
+            window.sessionStorage.clear();
+            this.$router.replace("/");
+            //触发后禁止浏览器的后退键
+            history.pushState(null, null, document.URL);
+            window.addEventListener(
+              "popstate",
+              function (e) {
+                history.pushState(null, null, document.URL);
+              },
+              false
+            );
         });
         ;
     },
@@ -430,6 +434,37 @@
 </script>
 
 <style scoped lang="less">
+  /deep/.demo-table-expand {
+    font-size: 0;
+  }
+  /deep/.demo-table-expand label {
+    width: 80px;
+    color: #99a9bf;
+   
+  }
+  /deep/.el-table__expanded-cell{
+    padding:2px 0
+  }
+  /deep/.demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left:1%;
+    width: 97%;
+  }
+  /deep/.el-form-item__content{
+    // position: relative;
+    display: inline-block;
+    // background-color: pink;
+    width:92%
+  }
+  /deep/.el-form-item__content span{
+    // background-color: purple;
+    // position: absolute;
+    // width:100%;
+    word-break: break-word;
+    margin-top:7px;
+    line-height: 26px;
+  }
   /deep/.tableClass .cell {
   // padding-bottom: 12px;
   height: 20px;
