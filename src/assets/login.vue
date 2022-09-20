@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-      <!-- <div><img :src="imgurl" alt="imgurl" style="width:150px;height:120px;margin-left:10%"></div> -->
+      <div><img :src="imgurl" alt="123" style="width:550px;height:550px;margin-left:5%"></div>
       <!-- <div><img :src="imgurl" alt="imgurl" title="登录页面" style="width:60px;height:60px;margin-left:20%;cursor:pointer;"></div> -->
       <div class="login1">
         <el-form :rules="rules" class="login-container" ref="loginForm" :model="loginForm">
@@ -34,6 +34,7 @@
         return {
         //   imgurl:require("@/assets/logo2.png"),
           // imgurl:require("@/assets/changanlogo.png"),
+          imgurl:require("@/assets/a7fba5c3346470712319616c9a7ddc33.png"),
           captchaUrl:'/verify_code?time'+new Date(),
           loginForm:{
             login_user:'',
@@ -133,8 +134,8 @@
     }
    .login1{
      position: absolute;
-      left:50%;
-      margin-left: -210px;
+      left:52%;
+      // margin-left: -210px;
       top:50%;
       margin-top:-190px;
    }
@@ -200,18 +201,6 @@
       top: 100%;
       left: 0;
   }
-  //将验证码放进input框内
-  // .codebox{
-  //   position:relative;
-  //   box-sizing: border-box;
-  // }
-  // .codebox span{
-  //   position: absolute;
-  //   display: block;
-  //   right:2px;
-  //   top:2px;
-  //   // vertical-align:middle;
-  // }
   .code{
     width: 210px;
   }

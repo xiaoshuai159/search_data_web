@@ -312,7 +312,7 @@
       //console.log(`当前页: ${val}`);
     },
     search(){
-      this.loading = true;
+      // this.loading = true;
       this.$store.dispatch('updatereqdata2',{
               ip: this.searchValue.ip,
               s_time:this.start_time,
@@ -351,18 +351,18 @@
             message: "用户信息异常,请重试！",
             type: "error",
           });
-           window.sessionStorage.clear();
-            // this.$store.dispatch("updateuserinfo", []);
-            this.$router.replace("/");
-            //触发后禁止浏览器的后退键
-            history.pushState(null, null, document.URL);
-            window.addEventListener(
-              "popstate",
-              function (e) {
-                history.pushState(null, null, document.URL);
-              },
-              false
-            );
+          //  window.sessionStorage.clear();
+          //   // this.$store.dispatch("updateuserinfo", []);
+          //   this.$router.replace("/");
+          //   //触发后禁止浏览器的后退键
+          //   history.pushState(null, null, document.URL);
+          //   window.addEventListener(
+          //     "popstate",
+          //     function (e) {
+          //       history.pushState(null, null, document.URL);
+          //     },
+          //     false
+          //   );
         });
         
     },
