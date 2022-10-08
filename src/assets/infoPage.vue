@@ -13,7 +13,11 @@
     </header>
     <section class="w">
       <div class="infobody">
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive" />
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive" />
       </div>      
     </section>
   </div>

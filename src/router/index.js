@@ -22,22 +22,31 @@ const router = new Router({
       children:[{
         path: '/info1',
         name: 'info1',
-        component: info1
+        component: info1,
+        meta:{
+          keepAlive:true
+        }
       },{
         path: '/info2',
         name: 'info2',
-        component: info2
+        component: info2,
+        meta:{
+          keepAlive:true
+        }
       },{
         path: '/info3',
         name: 'info3',
-        component: info3
+        component: info3,
+        meta:{
+          keepAlive:true
+        }
       }]
     },
   ]
 })
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  console.log('token为:'+token)
+  // console.log('token为:'+token)
   if (to.name!=='login'&&!token) next({name:'login'})
   else next()
 })

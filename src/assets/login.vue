@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-      <div><img :src="imgurl" alt="123" style="width:550px;height:550px;margin-left:5%"></div>
+      <div class="img_div"><img :src="imgurl" alt="123" style="width:550px;height:550px;margin-left:5%"></div>
       <!-- <div><img :src="imgurl" alt="imgurl" title="登录页面" style="width:60px;height:60px;margin-left:20%;cursor:pointer;"></div> -->
       <div class="login1">
         <el-form :rules="rules" class="login-container" ref="loginForm" :model="loginForm">
@@ -117,7 +117,11 @@
    
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped lang="less">
-  
+    .img_div{
+      position: absolute;
+      top:50%;
+      margin-top:-285px;
+    }
     h1{
         letter-spacing:2px;
         
