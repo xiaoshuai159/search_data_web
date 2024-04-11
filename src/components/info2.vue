@@ -1,58 +1,87 @@
 <template>
   <div class="all">
     <header>
-      <span style="margin:10px 8px 8px 10.4%">IP :</span><span>
-        <el-input v-model="searchValue.ip"></el-input>
-      </span>
-      <span style="margin:10px 8px 8px 11.9%">境内外 :</span><span>
-        <el-select v-model="value2" clearable placeholder="请选择" ref="selectLable2">
-          <el-option v-for="item in options2" :key="item.value2" :label="item.label2" :value="item.value2">
-          </el-option>
-        </el-select>
-      </span>
-      <span style="margin:10px 8px 8px 10.99%">备案归属 :</span><span>
-        <el-input v-model="searchValue.owner"></el-input>
-      </span><br />
-      <span style="margin:2px 8px 8px 6.1%">起始时间 :</span><span>
-        <el-date-picker v-model="start_time" type="datetime" placeholder="选择时间" align="right"
-          :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
-        </el-date-picker>
-      </span>
-      <span style="margin:2px 8px 8px 10.4%">终止时间 :</span><span>
-        <el-date-picker v-model="end_time" type="datetime" placeholder="选择时间" align="right"
-          :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
-        </el-date-picker>
-      </span>
-      <span style="margin:2px 8px 8px 13.8%">周期 :</span>
-      <span>
-        <el-select v-model="value3" clearable placeholder="请选择" ref="selectLable3">
-          <el-option v-for="item in options3" :key="item.value3" :label="item.label3" :value="item.value3">
-          </el-option>
-        </el-select>
-      </span>
-      <el-button style="padding:2px;margin:0 9px;width: 20px" icon="el-icon-refresh" @click="updateTime()"></el-button>
-      <br />
-      <span style="margin:2px 8px 8px 8.9%">省份 :</span><span>
-        <el-input v-model="searchValue.province"></el-input>
-      </span>
-      <span style="margin:2px 8px 8px 13.3%">地市 :</span><span>
-        <el-input v-model="searchValue.city"></el-input>
-      </span>
-      <span style="margin:2px 8px 8px 13.75%">区县 :</span><span>
-        <el-input v-model="searchValue.district"></el-input>
-      </span>
-      <br />
-      <span style="margin:2px 8px 8px 4.7%">数据库类型 :</span>
-      <span>
-        <el-select v-model="value" clearable placeholder="请选择" ref="selectLable1">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-          </el-option>
-        </el-select>
-      </span>
-      <span style="margin:-6px 8px 8px 14.4%">
-        <el-button @click="search()">查询</el-button>
-      </span>
-
+      <div>
+        <el-row>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">IP :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.ip" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">起始时间 :</span><span style="width: 50%;">
+                <el-date-picker v-model="start_time" type="datetime" placeholder="选择时间" align="right"
+                  :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
+                </el-date-picker>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">省份 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.province" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">数据库类型 :</span>
+              <span style="width: 50%;">
+                <el-select v-model="value" clearable placeholder="请选择" ref="selectLable1">
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+              </span>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">境内外 :</span><span style="width: 50%;">
+                <el-select v-model="value2" clearable placeholder="请选择" ref="selectLable2">
+                  <el-option v-for="item in options2" :key="item.value2" :label="item.label2" :value="item.value2">
+                  </el-option>
+                </el-select>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">终止时间 :</span><span style="width: 50%;">
+                <el-date-picker v-model="end_time" type="datetime" placeholder="选择时间" align="right"
+                  :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
+                </el-date-picker>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">地市 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.city" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:-5px 40% 5px 43%">
+                <el-button @click="search()">查询</el-button>
+              </span>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">备案归属 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.owner" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">周期 :</span>
+                <span >
+                  <el-select v-model="value3" clearable placeholder="请选择" ref="selectLable3">
+                    <el-option v-for="item in options3" :key="item.value3" :label="item.label3" :value="item.value3">
+                    </el-option>
+                  </el-select>
+                </span>
+                <el-button style="padding:2px;margin:0 0 0 9px;width: 20px" icon="el-icon-refresh" @click="updateTime()"></el-button>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">区县 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.district" maxlength="15"></el-input>
+              </span>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </header>
     <section class="Body">
       <el-table :data="tableData.slice(
@@ -60,29 +89,28 @@
         currentPage * pagesize
       )" class="tableClass" border stripe size="small" v-loading="loading" style="width:96%;margin: auto;"
         ref="multipleTable" tooltip-effect="dark">
-
+        <el-table-column type="index"></el-table-column>
         <el-table-column prop="dip" label="IP" min-width="116" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="port" label="端口" min-width="55" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="min_time" label="起始时间" min-width="141" show-overflow-tooltip>
+        <!-- <el-table-column prop="min_time" label="起始时间" min-width="141" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="max_time" label="终止时间" min-width="141" show-overflow-tooltip>
+        </el-table-column> -->
+        <el-table-column prop="event_time" label="时间" min-width="141" show-overflow-tooltip>
         </el-table-column>
-
-        <el-table-column prop="s_c_boundary" label="备案归属" min-width="69" show-overflow-tooltip>
+        <!-- <el-table-column prop="s_c_boundary" label="备案归属" min-width="69" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="database_type" label="数据库类型" min-width="97" show-overflow-tooltip>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column prop="c_region" label="省份" min-width="60" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="c_city" label="地市" min-width="60" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="c_district" label="区县" min-width="60" show-overflow-tooltip>
-
         </el-table-column>
         <el-table-column prop="company" label="单位" min-width="190" show-overflow-tooltip>
-
         </el-table-column>
       </el-table>
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
@@ -95,7 +123,8 @@
 <script>
 import axios from 'axios';
 import { Message } from "element-ui";
-import { getNumHoursAgo } from "@/utils/getNumHoursAgo"
+import { getNumHoursAgo } from "@/utils/getNumHoursAgo";
+import dayjs from 'dayjs'
 export default {
   name: 'info1',
   data() {
@@ -140,31 +169,175 @@ export default {
         }]
       },
       tableData: [
-        //   {
-        //   dip:'191.168.444.555',
-        //   port:'9200',
-        //   min_time:'2022-09-03 04:14:53',
-        //   max_time:'2022-09-03 21:23:53',
-        //   s_c_boundary:'境内',
-        //   c_region:'四川省',
-        //   c_city:'成都市',
-        //   c_district:'新都区',
-        //   company:'成都市武侯区行政审批局',
-        //   database_type:'ElasticSearch',
+          {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch',
 
-        // },
-        // {
-        //   dip:'191.168.444.555',
-        //   port:'9200',
-        //   min_time:'2022-09-03 04:14:53',
-        //   max_time:'2022-09-03 21:23:53',
-        //   s_c_boundary:'境内',
-        //   c_region:'四川省',
-        //   c_city:'成都市',
-        //   c_district:'新都区',
-        //   company:'成都市武侯区行政审批局',
-        //   database_type:'ElasticSearch'
-        // },
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
+        {
+          dip:'191.168.444.555',
+          port:'9200',
+          min_time:dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'),
+          max_time:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          s_c_boundary:'境内',
+          c_region:'四川省',
+          c_city:'成都市',
+          c_district:'新都区',
+          company:'成都市武侯区行政审批局',
+          database_type:'ElasticSearch'
+        },
       ],
       options: [{
         value: '选项1',
@@ -333,13 +506,36 @@ export default {
         });
 
     },
+    async readcsv(){
+      // const fileReader = new FileReader()
+      const filePath = '../../json/ip_dwname.csv'
+      const {data:res} = await axios({
+        method:'GET',
+        url:filePath
+      })
+      this.csvtoTableData(res)
+    },
+    csvtoTableData(csvData){
+      const preData = csvData.split('\n').map((line)=>{
+        // const regex = /([^,]+)$/;
+        let [event_time, dip, port, c_region, c_city, c_district, company] = line.split(',');
+        const originalDate = new Date(event_time);
+        event_time = dayjs(originalDate).format('YYYY-MM-DD HH:mm:ss')
+        return {event_time, dip, port, c_region, c_city, c_district, company}
+      })
+      this.tableData = preData
+    },
   },
+  
   beforeRouteLeave(to, from, next) {
     to.meta.keepAlive = true
     next(0)
   },
+  created(){
+    this.readcsv()
+  },
   mounted() {
-    this.search()
+    // this.search()  // 7.6 测试暂时关闭
   },
   watch: {
     start_time: {

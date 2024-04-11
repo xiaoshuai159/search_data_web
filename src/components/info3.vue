@@ -1,57 +1,82 @@
 <template>
   <div class="all">
     <header>
-
-      <span style="margin:10px 8px 8px 9%">源IP :</span><span>
-        <el-input v-model="searchValue.sourceIP"></el-input>
-      </span>
-      <span style="margin:10px 8px 8px 12%">目的IP :</span><span>
-        <el-input v-model="searchValue.destIP"></el-input>
-      </span>
-      <span style="margin:10px 8px 8px 11%">备案归属 :</span><span>
-        <el-input v-model="searchValue.record"></el-input>
-      </span> <br />
-      <span style="margin:2px 8px 8px 6.1%">起始时间 :</span><span>
-        <el-date-picker v-model="start_time" type="datetime" placeholder="选择时间" align="right"
-          :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
-
-        </el-date-picker>
-      </span>
-      <span style="margin:2px 8px 8px 10.4%">终止时间 :</span><span>
-        <el-date-picker v-model="end_time" type="datetime" placeholder="选择时间" align="right"
-          :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
-        </el-date-picker>
-      </span>
-      <span style="margin:2px 8px 8px 13.8%">周期 :</span>
-      <span>
-        <el-select v-model="value3" clearable placeholder="请选择" ref="selectLable3">
-          <el-option v-for="item in options3" :key="item.value3" :label="item.label3" :value="item.value3">
-          </el-option>
-        </el-select>
-      </span>
-      <el-button style="padding:2px;margin:0 9px;width: 20px" icon="el-icon-refresh" @click="updateTime()"></el-button>
-      <br />
-      <span style="margin:2px 8px 8px 8.9%">省份 :</span><span>
-        <el-input v-model="searchValue.destProvince"></el-input>
-      </span>
-      <span style="margin:2px 8px 8px 13.3%">地市 :</span><span>
-        <el-input v-model="searchValue.destCity"></el-input>
-      </span>
-      <span style="margin:2px 8px 8px 13.75%">区县 :</span><span>
-        <el-input v-model="searchValue.destDistrict"></el-input>
-      </span>
-      <br/>
-      <span style="margin:2px 8px 8px 4.7%">数据库类型 :</span>
-      <span>
-        <el-select v-model="value" clearable placeholder="请选择" ref="selectLable1">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-          </el-option>
-        </el-select>
-      </span> 
-      <span style="margin:-6px 8px 8px 10%">
-        <el-button @click="search()">查询</el-button>
-      </span>
-
+      <el-row>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">源IP :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.sourceIP" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">起始时间 :</span><span style="width: 50%;">
+                <el-date-picker v-model="start_time" type="datetime" placeholder="选择时间" align="right"
+                  :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
+                </el-date-picker>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">省份 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.destProvince" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">数据库类型 :</span>
+              <span style="width: 50%;">
+                <el-select v-model="value" clearable placeholder="请选择" ref="selectLable1">
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+              </span>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">目的IP :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.destIP" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">终止时间 :</span><span style="width: 50%;">
+                <el-date-picker v-model="end_time" type="datetime" placeholder="选择时间" align="right"
+                  :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss" @focus="value3=''">
+                </el-date-picker>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">地市 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.destCity" maxlength="15"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:-5px 60% 5px 30%">
+                <el-button @click="search()">查询</el-button>
+              </span>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div>
+              <span style="margin:10px 8px 8px 0; width: 40%;text-align: right;">备案归属 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.record" maxlength="20"></el-input>
+              </span>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">周期 :</span>
+                <span >
+                  <el-select v-model="value3" clearable placeholder="请选择" ref="selectLable3">
+                    <el-option v-for="item in options3" :key="item.value3" :label="item.label3" :value="item.value3">
+                    </el-option>
+                  </el-select>
+                </span>
+                <el-button style="padding:2px;margin:0 0 0 9px;width: 20px" icon="el-icon-refresh" @click="updateTime()"></el-button>
+            </div>
+            <div>
+              <span style="margin:2px 8px 8px 0; width: 40%;text-align: right;">区县 :</span><span style="width: 50%;">
+                <el-input v-model="searchValue.destDistrict" maxlength="15"></el-input>
+              </span>
+            </div>
+          </el-col>
+        </el-row>
     </header>
     <section class="Body">
       <el-table :data="tableData.slice(
@@ -147,33 +172,87 @@ export default {
 
       },
       tableData: [
-        //   {
-        //   event_time:"2022-09-04 12:28:50",
-        //   database_type:"Elasticsearch",
-        //   status:"es登陆成功",
-        //   sip:"189.183.247.190",
-        //   sport:50068,
-        //   dip:"222.212.909.333",
-        //   dport:9200,
-        //   d_region:"四川省",
-        //   d_city:"成都市",
-        //   d_district:"市辖区",
-        //   d_owner:"锦江肖小儿中医门诊部",
-        //   payload:'sajsahkdjhfsadhafsdgasgagsafhsadnfsaduouhguossadnflsadngsasadfasdgrtwhdgsgjsgjhsdhsfhsfh4ty4whdsfhsdfhsfognasfkjsadhkgjdouhuworgwriogsadsdjafjksdafkjsabdjgbsasjdlfljsadfasjgdlkjsdalhdglsdhgaklasdjgasdjfoiasjdflksadjflsajdfoisjdfsadjflsaasjdlfkjasldgsangmsndgdfnwohguowrngsdansldfl'
-        // },
-        // {
-        //   event_time:"2022-09-04 12:28:50",
-        //   database_type:"Elasticsearch",
-        //   status:"es登陆成功",
-        //   sip:"18.183.247.190",
-        //   sport:50068,
-        //   dip:"222.212.90.33",
-        //   dport:9200,
-        //   d_region:"四川省",
-        //   d_city:"成都市",
-        //   d_district:"市辖区",
-        //   d_owner:"锦江肖小儿中医门诊部"
-        // }
+          {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"189.183.247.190",
+          sport:50068,
+          dip:"222.212.909.333",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部",
+          payload:'sajsahkdjhfsadhafsdgasgagsafhsadnfsaduouhguossadnflsadngsasadfasdgrtwhdgsgjsgjhsdhsfhsfh4ty4whdsfhsdfhsfognasfkjsadhkgjdouhuworgwriogsadsdjafjksdafkjsabdjgbsasjdlfljsadfasjgdlkjsdalhdglsdhgaklasdjgasdjfoiasjdflksadjflsajdfoisjdfsadjflsaasjdlfkjasldgsangmsndgdfnwohguowrngsdansldfl'
+        },
+        {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"18.183.247.190",
+          sport:50068,
+          dip:"222.212.90.33",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部"
+        },
+        {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"189.183.247.190",
+          sport:50068,
+          dip:"222.212.909.333",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部",
+          payload:'sajsahkdjhfsadhafsdgasgagsafhsadnfsaduouhguossadnflsadngsasadfasdgrtwhdgsgjsgjhsdhsfhsfh4ty4whdsfhsdfhsfognasfkjsadhkgjdouhuworgwriogsadsdjafjksdafkjsabdjgbsasjdlfljsadfasjgdlkjsdalhdglsdhgaklasdjgasdjfoiasjdflksadjflsajdfoisjdfsadjflsaasjdlfkjasldgsangmsndgdfnwohguowrngsdansldfl'
+        },
+        {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"18.183.247.190",
+          sport:50068,
+          dip:"222.212.90.33",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部"
+        },
+        {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"189.183.247.190",
+          sport:50068,
+          dip:"222.212.909.333",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部",
+          payload:'sajsahkdjhfsadhafsdgasgagsafhsadnfsaduouhguossadnflsadngsasadfasdgrtwhdgsgjsgjhsdhsfhsfh4ty4whdsfhsdfhsfognasfkjsadhkgjdouhuworgwriogsadsdjafjksdafkjsabdjgbsasjdlfljsadfasjgdlkjsdalhdglsdhgaklasdjgasdjfoiasjdflksadjflsajdfoisjdfsadjflsaasjdlfkjasldgsangmsndgdfnwohguowrngsdansldfl'
+        },
+        {
+          event_time:"2022-09-04 12:28:50",
+          database_type:"Elasticsearch",
+          status:"es登陆成功",
+          sip:"18.183.247.190",
+          sport:50068,
+          dip:"222.212.90.33",
+          dport:9200,
+          d_region:"四川省",
+          d_city:"成都市",
+          d_district:"市辖区",
+          d_owner:"锦江肖小儿中医门诊部"
+        },
       ],
       options: [{
         value: '选项1',
@@ -345,7 +424,7 @@ export default {
     // }else{
     //   console.log('没执行');
     // }
-    this.search()
+    // this.search()  // 7.6 测试暂时关闭
 
   },
   beforeRouteLeave(to, from, next) {

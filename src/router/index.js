@@ -18,7 +18,7 @@ const router = new Router({
       path: '/infoPage',
       name: 'infoPage',
       component: infoPage,
-      redirect:'/info2',
+      redirect:'/info1',
       children:[{
         path: '/info1',
         name: 'info1',
@@ -44,10 +44,10 @@ const router = new Router({
     },
   ]
 })
-router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
-  // console.log('token为:'+token)
-  if (to.name!=='login'&&!token) next({name:'login'})
-  else next()
-})
+// router.beforeEach((to, from, next) => {  // 7.6 测试暂时关闭
+//   const token = localStorage.getItem('token')
+//   // console.log('token为:'+token)
+//   if (to.name!=='login'&&!token) next({name:'login'})
+//   else next()
+// })
 export default router

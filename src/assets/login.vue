@@ -1,26 +1,25 @@
 <template>
     <div class="login-wrap">
-      <div class="img_div"><img :src="imgurl" alt="123" style="width:550px;height:550px;margin-left:5%"></div>
-      <!-- <div><img :src="imgurl" alt="imgurl" title="登录页面" style="width:60px;height:60px;margin-left:20%;cursor:pointer;"></div> -->
+      <div class="img_div"><img :src="imgurl" alt="logo" style="width:550px;height:550px;"></div>
       <div class="login1">
         <el-form :rules="rules" class="login-container" ref="loginForm" :model="loginForm">
-        <h1 class="title">快速查询系统登录</h1>
+        <h1 class="title">联网数据库监测综合管理系统</h1>
         <el-form-item prop="login_user">
           <el-input type="text" v-model="loginForm.login_user" placeholder="请输入账号" auto-complete="false" prefix-icon="el-icon-user-solid" minlength="5" maxlength="30"></el-input>
         </el-form-item>
         <el-form-item prop="login_passwd">
           <el-input  v-model="loginForm.login_passwd" placeholder="请输入密码" auto-complete="false" prefix-icon="el-icon-lock" minlength="5" maxlength="30" show-password></el-input>
         </el-form-item>
-         <el-form-item prop="code" class='codebox'>
+         <!-- <el-form-item prop="code" class='codebox'>
           <el-input type="text" class='code' v-model="loginForm.code" placeholder="请输入验证码" auto-complete="false" prefix-icon="el-icon-key" style="vertical-align:middle;margin-right:5px;">
            
           </el-input>
            <span><img :src="captchaUrl"  @click="updateCaptcha" style="vertical-align:middle; height:37px"  align='right'></span>
-          <!-- style="height:35px;margin-top:6px" -->
-        </el-form-item> 
+        </el-form-item>  -->
         
         <el-form-item class="buttonBox">
-          <el-button type="primary" style="width: 40%; " @click="submitLogin" @keyup.enter="submitLogin">登录</el-button>
+          <!-- 无验证码的情况：新增样式 margin-top: 3vh -->
+          <el-button type="primary" style="width: 40%; margin-top: 3vh;" @click="submitLogin" @keyup.enter="submitLogin">登录</el-button>
         </el-form-item>
       </el-form>
       </div>
@@ -53,57 +52,58 @@
       created() {
           var lett = this;
           document.onkeydown = function(e) {
-          var key = window.event.keyCode;
-          if (key == 13) {
-          lett.submitLogin();
+            var key = window.event.keyCode;
+            if (key == 13) {
+            lett.submitLogin();
+            }
           }
-        }
       },
       methods: {
         submitLogin() {
+          // 假数据， 不走接口，前端自己玩
+          if(this.loginForm.login_user == 'sjk_2022_cncert' && this.loginForm.login_passwd == 't(&dMB/HpsMz?YgeB-'){
+             this.$router.push({name:'infoPage'})
+          }else{
+            this.$message.error('账号密码错误！')
+          }
+            // this.$router.push({name:'infoPage'})
             
-          this.$refs.loginForm.validate((valid) => {
-            if (valid) {
-              //第一种
-              // this.$http.interceptors.response.use((rep)=>{
-              //   return Promise.resolve(rep)
-              // }, (error) => {
-              //   //console.log(error.response.data.code)
-              //   if(error.response.code=='502'){
-              //     this.$message.error('验证码有误，请重试！');
-              //   }else if((error.response.code=='501')){
-              //     this.$message.error('账号或密码有误，请重试！');
-              //   }
-              //     // return Promise.reject(error);
-              //   })
-             this.$http.post('/login_in',this.loginForm).then(rep=>{
-                
-                if(rep){
-                  // const user_info = rep.data;                
-                  // window.sessionStorage.setItem('user_info',JSON.stringify(user_info))
-                  this.$message({
-                    message: '登陆成功！',
-                    type: 'success'
-                  });      
-                  this.$router.push({
-                    name:'infoPage',
-                    // params:{
-                    //     city_name:rep.data.city,
-                    //     city_adcode:rep.data.adcode
-                    // }
-                  })
-                  this.$store.dispatch('updatetoken',rep.data.token)         
-                }
-              }).catch((err)=>{
-                 console.log(err)
-                 this.$message.error('输入有误，请重试！');
-              })
+            
+          // this.$refs.loginForm.validate((valid) => {  // 7.6 测试暂时关闭
+          //   if (valid) {
+          //     //第一种
+          //     // this.$http.interceptors.response.use((rep)=>{
+          //     //   return Promise.resolve(rep)
+          //     // }, (error) => {
+          //     //   //console.log(error.response.data.code)
+          //     //   if(error.response.code=='502'){
+          //     //     this.$message.error('验证码有误，请重试！');
+          //     //   }else if((error.response.code=='501')){
+          //     //     this.$message.error('账号或密码有误，请重试！');
+          //     //   }
+          //     //     // return Promise.reject(error);
+          //     //   })
+          //    this.$http.post('/login_in',this.loginForm).then(rep=>{                
+          //       if(rep){
+          //         this.$message({
+          //           message: '登陆成功！',
+          //           type: 'success'
+          //         });      
+          //         this.$router.push({
+          //           name:'infoPage',
+          //         })
+          //         this.$store.dispatch('updatetoken',rep.data.token)         
+          //       }
+          //     }).catch((err)=>{
+          //        console.log(err)
+          //        this.$message.error('输入有误，请重试！');
+          //     })
   
-            } else {
-              this.$message.error('请输入所有字段！');
-              return false;
-            }
-          });
+          //   } else {
+          //     this.$message.error('请输入所有字段！');
+          //     return false;
+          //   }
+          // });
         
         },
         updateCaptcha() {
@@ -117,25 +117,23 @@
    
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped lang="less">
+    .login-wrap {
+      width: 100%;
+      height: 100%;
+      /* background-color: #112346; */
+      background-repeat: no-repeat;
+    }
     .img_div{
       position: absolute;
       top:50%;
       margin-top:-285px;
+      right:50%
     }
     h1{
         letter-spacing:2px;
         
     }
-    .login-wrap {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      padding-top: 1%;
-      /* background-color: #112346; */
-      background-repeat: no-repeat;
-      background-position: center right;
-      background-size: 100%;
-    }
+
    .login1{
      position: absolute;
       left:52%;
